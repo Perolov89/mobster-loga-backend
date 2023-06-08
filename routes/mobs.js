@@ -22,8 +22,11 @@ router.get('/', function (req, res, next) {
 // `POST YOUR_BACKEND_URL/mobs/` # add a new mob
 router.post('/', function (req, res, next) {
   const newId = uuidv4();
-  let newMob = Object.assign({ mob_id: newId }, req.body);
-  newMob.mob_members.forEach((element) => (element.id = uuidv4()));
+  const newMob = {
+    id: newId,
+    members: [],
+    mob_name: req.body.mob_name
+  }
   allMobs.push(newMob);
   fs.writeFileSync('./db/mobs-data.json', JSON.stringify(allMobs), () => {
     res
