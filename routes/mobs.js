@@ -6,7 +6,6 @@ const { v4: uuidv4 } = require('uuid');
 
 /* GET users listing. */
 const allMobs = JSON.parse(fs.readFileSync('./db/mobs-data.json', 'utf-8'));
-console.log(allMobs);
 
 router.get('/', function (req, res, next) {
   res
@@ -28,29 +27,34 @@ router.post('/', function (req, res, next) {
     mob_name: req.body.mob_name
   }
   allMobs.push(newMob);
-  fs.writeFileSync('./db/mobs-data.json', JSON.stringify(allMobs), () => {
-    res
-      .status(201)
-      .json({
-        status: 'Success',
-        count: allMobs.length,
-        data: allMobs,
-      })
-      .end();
-  });
+  fs.writeFileSync('./db/mobs-data.json', JSON.stringify(allMobs));
+  res
+    .status(201)
+    .json({
+      status: 'Success',
+      count: allMobs.length,
+      data: allMobs,
+    })
+    .end();
 });
 
 // `GET YOUR_BACKEND_URL/mobs/:mobId` # get a particular mob
 router.get('/:id', function (req, res, next) {
   const { id } = req.params
   const targetMob = allMobs.find(element => element.mob_id === id)
-  res
-  .status(201)
-  .json({
-    status: 'Success',
-    data: targetMob,
-  })
-  .end()
+  if( targetMob === undefined) {
+    res
+    .status(404)
+    .json({error: 'Id not found'})
+  } else {
+    res
+    .status(201)
+    .json({
+      status: 'Success',
+      data: targetMob,
+    })
+    .end()
+  }
 })
 
 // `GET YOUR_BACKEND_URL/mobs/:mobId/members` # get all mob members of a particular mob
@@ -89,6 +93,17 @@ router.post('/:id/members', function (req, res, next) {
 })
 
 // `GET YOUR_BACKEND_URL/mobs/:mobId/members/:memberId` # get a particular mob-member of a particular mob
-
+router.get('/:id/members/:memberId', function (req, res, next) {
+  const { memberId, id } = req.params
+  const targetMob = allMobs.find(element => element.mob_id === id)
+  const targetMobMembers = targetMob.mob_members.find(member => member.id === memberId)
+  res
+  .status(200)
+  .json({
+    status: 'Success',
+    data: targetMobMembers
+  })
+  .end();
+})
 
 module.exports = router;

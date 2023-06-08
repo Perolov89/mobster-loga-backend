@@ -19,7 +19,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/mobs', mobsRouter); // <-- added
 
+app.all('*', (req, res) => {
+    res
+    .status(404)
+    .send('Bad request: page not found')
+})
 const port = 4000
-app.listen(port, () => console.log(`\nPORT 4000 ENGAGED!!!!!! *.*\nhttp://localhost:${port}`))
+app.listen(port, () => console.log(`\nPORT ${port} ENGAGED!!!!!! *.*\nhttp://localhost:${port}`))
 
 module.exports = app;

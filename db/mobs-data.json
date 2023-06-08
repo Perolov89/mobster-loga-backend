@@ -55,31 +55,5 @@
         "github_link": "https://github.com/Dean"
       }
     ]
-  },
-  {
-    "mob_id": "9e3a598f-09eb-42f3-afb6-63052c732c7d",
-    "mob_name": "BOGA-BOGA",
-    "mob_members": [
-      {
-        "name": "gugu",
-        "id": "6419f58e-1bad-4da2-abc9-109ef1c83354",
-        "github_link": "https://github.com/A"
-      },
-      {
-        "name": "pepe",
-        "id": "74b06633-2135-4911-95ea-49b8f4e258ac",
-        "github_link": "https://github.com/A"
-      },
-      {
-        "name": "papa",
-        "id": "e28c4149-9262-462a-9c4e-bb34f42be6ac",
-        "github_link": "https://github.com/A"
-      },
-      {
-        "name": "baba",
-        "id": "0f7cd5fa-2504-4c03-9567-f9e2e40c5017",
-        "github_link": "https://github.com/A"
-      }
-    ]
   }
 ]
