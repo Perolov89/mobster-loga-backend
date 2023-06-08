@@ -24,7 +24,7 @@ router.post('/', function (req, res, next) {
   const newId = uuidv4();
   const newMob = {
     id: newId,
-    members: [],
+    mob_members: [],
     mob_name: req.body.mob_name
   }
   allMobs.push(newMob);
